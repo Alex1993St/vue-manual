@@ -7,13 +7,12 @@
 <body>
 
 <div id="app">
-    <input type="text" v-on:input="changeName">
-    <h1>String: {{ name }}</h1>
-    <h1>Sum: {{ 10 + 60 }}</h1>
-    <h1>Integer: {{ number }}</h1>
-    <h1>Method: {{ sayHello() }}</h1>
-    <h1>If statement:  {{ isOk ? "Ok" : "not Ok"}}</h1>
-    <h1>Function: {{ string.split('').reverse().join('') }}</h1>
+    <h2>Count = {{ count }}</h2>
+    <button v-on:click="riseCount">Plus 1</button>
+    <button v-on:click="minusCount">Minus 1</button>
+
+    <h2 v-on:mouseOver="onHover">Count2 without method = {{ count2 }}</h2>
+    <button v-on:click="count2++">Plus 1</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -21,18 +20,19 @@
     new Vue({
         el: "#app",
         data: {
-            name: "Hello",
-            number: 100,
-            isOk: false,
-            string: "My name is Alex"
+            count: 0,
+            count2: 0
         },
         methods: {
-            changeName: function(event) {
-                this.name = event.target.value;
+            riseCount()  {
+                this.count++;
             },
-
-            sayHello: () => {
-                return "Hello"
+            minusCount() {
+                this.count--;
+            },
+            onHover: function (event) {
+                // event.target - to get element h2
+                event.target.style.color = 'red';
             }
         }
     })
