@@ -13,6 +13,10 @@
 
     <h2 v-on:mouseOver="onHover">Count2 without method = {{ count2 }}</h2>
     <button v-on:click="count2++">Plus 1</button>
+
+    <h2>{{ title }} with somenumber = {{ count3 }}</h2>
+    <button v-on:click="upMore(10, 'count +=10', $event)">Plus 1</button>
+    <button v-on:click="upMore(5, 'count +=5', $event)">Plus 1</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -21,7 +25,9 @@
         el: "#app",
         data: {
             count: 0,
-            count2: 0
+            count2: 0,
+            count3: 0,
+            title: "count"
         },
         methods: {
             riseCount()  {
@@ -33,6 +39,18 @@
             onHover: function (event) {
                 // event.target - to get element h2
                 event.target.style.color = 'red';
+            },
+
+            //    (5, 'count +=5', $event)
+            upMore(n,    str,       event){
+                this.count3 += n;
+                this.title = str;
+
+                if (n === 5) {
+                    event.target.style.color = "red"
+                } else if (n === 10) {
+                    event.target.style.color = "blue"
+                }
             }
         }
     })
